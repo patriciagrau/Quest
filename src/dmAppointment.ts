@@ -13,6 +13,7 @@ const grammar: { [index: string]: { person?: string, day?: string, time?: string
     "John": { person: "John Appleseed" },
     "Minerva": { person: "Minerva S"},
     "your mom": { person: "my mom, Patricia"},
+    "mark": { person: "Marc G"},
     "vladislav": { person: "Vladislav M"},
     "Jacob": { person: "Jacobo"},
     "on Monday": { day: "Monday"},
@@ -42,7 +43,7 @@ const yesNo: { [index: string]: {yesNo: string}} = {
 }
 
 export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
-    initial: 'init',
+    initial: 'welcome',
     states: {
         init: {
             on: {
@@ -248,7 +249,7 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
 			}, */
             states: {
                 prompt: {
-                    entry: send((context) => ({ // We need to access the context that has the info. Similar to "say" function
+                    entry: send((context) => ({ 
                         type: "SPEAK",
                         value: `Your appointment has been created.`
                     })),
