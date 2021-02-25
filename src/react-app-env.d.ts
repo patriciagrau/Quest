@@ -9,7 +9,8 @@ interface SDSContext {
     person: string,
     day: string,
     time: string,
-    intent_res: any
+    intent_res: any,
+    command: any
 
 }
 

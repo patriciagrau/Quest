@@ -3,10 +3,10 @@ import { MachineConfig, send, Action } from "xstate";
 // SRGS parser and example (logs the results to console on page load)
 import { loadGrammar } from './runparser'
 import { parse } from './chartparser'
-import { grammar } from './grammars/pizzaGrammar'
+import { grammar } from './grammars/quoteGrammar'
 
 const gram = loadGrammar(grammar)
-const input = "I would like a coca cola and three large pizzas with pepperoni and mushrooms"
+const input = "do be do be do"
 const prs = parse(input.split(/\s+/), gram)
 const result = prs.resultsForRule(gram.$root)[0]
 
@@ -68,6 +68,6 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                     always: '#root.dm.welcome'
                 }
             }
-        }
+        },
     }
 })
