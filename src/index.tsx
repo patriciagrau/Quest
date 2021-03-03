@@ -1,11 +1,11 @@
 import "./styles.scss";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Machine, assign, send, State } from "xstate";
+import { Machine, assign, State, actions } from "xstate";
 import { useMachine, asEffect } from "@xstate/react";
 import { inspect } from "@xstate/inspect";
-import { dmMachine } from "./dmSmartHome";
-
+import { dmMachine } from "./dmAppointmentPlus";
+const { send, cancel } = actions;
 
 inspect({
     url: "https://statecharts.io/inspect",
@@ -13,6 +13,7 @@ inspect({
 });
 
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
+
 
 
 const machine = Machine<SDSContext, any, SDSEvent>({
@@ -44,7 +45,9 @@ const machine = Machine<SDSContext, any, SDSEvent>({
                                 assign((_context, event) => { return { recResult: event.value } })],
                             target: '.match'
                         },
-                        RECOGNISED: 'idle'
+                        RECOGNISED: {target : 'idle', actions: cancel('maxsp')},
+                        // RECOGNISED: 'idle',
+                        MAXSPEECH: 'idle',
                     },
                     states: {
                         progress: {
