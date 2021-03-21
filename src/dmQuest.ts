@@ -315,8 +315,9 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                     initial: "prompt",
                     states: {
                         prompt: {
-                            entry: say("'We cannot trust him!' – They say, as they throw you in a cell, \
-                        where you spend your last days thinking about how you could have survived. You die. ")
+                            entry: say("You don't have anything with you. \
+                            'We cannot trust him!' – They say, as they throw you in a cell, \
+                            where you spend your last days thinking about how you could have survived. You die. ")
                         }
                     }
                 },
@@ -326,7 +327,7 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                     states: {
                         prompt: {
                             entry: say("The dwarves think you are hiding something from them, they do not trust you. \
-                        They throw you in a cell, where you spend your last days thinking how you could have survived. You die.")
+                            They throw you in a cell, where you spend your last days thinking how you could have survived. You die.")
                         }
                     }
                 },
@@ -437,7 +438,7 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                             target: "#threeDoors"
                         }, {
                             cond: (context) =>  context.intent_res.intent.name === 'deny',
-                            actions: assign((context) => { return {image : img8} }),
+                            actions: assign((context) => {mushroomCount === 0 || mushroomCount === undefined; return {mushCount: mushroomCount, image: img8}}),
                             target: "#threeDoors"
                         }, {
                             cond: (context) =>  context.intent_res.intent.name === 'help',
@@ -954,7 +955,6 @@ export const dmMachine: MachineConfig<SDSContext, any, SDSEvent> = ({
                             actions: assign((context) => { return {image : img41} }),
                             target: "#free4"
                         }, {
-                            cond: (context) => context.mushCount === 0,
                             actions: assign((context) => { return {image : img42} }),
                             target: "#youDie5"
                         }]
