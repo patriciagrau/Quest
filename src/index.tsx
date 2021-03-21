@@ -4,8 +4,9 @@ import * as ReactDOM from "react-dom";
 import { Machine, assign, State, actions } from "xstate";
 import { useMachine, asEffect } from "@xstate/react";
 import { inspect } from "@xstate/inspect";
-import { dmMachine } from "./dmAppointmentPlus";
+import { dmMachine } from "./dmQuest";
 const { send, cancel } = actions;
+import img from "./images/Diapositiva1.png";
 
 inspect({
     url: "https://statecharts.io/inspect",
@@ -107,7 +108,7 @@ const ReactiveButton = (props: Props): JSX.Element => {
         default:
             return (
                 <button type="button" className="glow-on-hover" {...props}>
-                    Click to start
+                    Click to play
                 </button >
             );
     }
@@ -157,10 +158,18 @@ function App() {
         }
     });
 
+let imgsrc = img;
+if (current.context.image) {imgsrc = current.context.image}
 
     return (
         <div className="App">
-            <ReactiveButton state={current} onClick={() => send('CLICK')} />
+            <div>
+                <ReactiveButton state={current} onClick={() => send('CLICK')} />
+            </div>
+            <div>
+                <img src={imgsrc}/>
+                {/* <img src={img}/> */}
+            </div>
         </div>
     )
 };
@@ -170,7 +179,7 @@ function App() {
 /* RASA API
  *  */
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
-const rasaurl = 'https://miauppointments.herokuapp.com/model/parse/' 
+const rasaurl = 'https://dsquest.herokuapp.com/model/parse/' 
 export const nluRequest = (text: string) =>
     fetch(new Request(proxyurl + rasaurl, {
         method: 'POST',

@@ -12,6 +12,10 @@ interface SDSContext {
     intent_res: any,
     command: any,
     counter: number,
+    mushCount: number,
+    mxCount: number,
+    gobletCount: number,
+    image: any
 
 }
 
