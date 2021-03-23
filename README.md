@@ -13,3 +13,5 @@ How to play:
 - set your browser language to English
 - Request temporary access to the demo server here: https://cors-anywhere.herokuapp.com/corsdemo
 - go to https://patriciagrau.github.io/quest
+
+PS: this game requires a Heroku app to work! Be sure to go to https://dsquest.herokuapp.com/ to wake it up!
